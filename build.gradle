@@ -1,0 +1,13 @@
+group 'net.savagedev'
+version '1.0.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+
+        maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+    }
+}

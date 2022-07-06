@@ -1,0 +1,12 @@
+group 'net.savagedev'
+version '1.0.0-SNAPSHOT'
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
+
+    compileOnly project(':Common')
+}
+
+jar {
+    archiveFileName.set(project.name + '.jar')
+}

@@ -1,0 +1,42 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'maven-publish'
+}
+
+group 'net.savagedev'
+version '1.0.1-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
+
+    implementation project(':Common')
+    implementation project(':Reflection')
+}
+
+shadowJar {
+    archiveClassifier.set("")
+    archiveFileName = rootProject.name + '-' + project.version + '.jar'
+}
+
+publishing {
+    repositories {
+        maven {
+            name = 'SavageDevRepository'
+            def releasesRepoUrl = 'https://repo.savagedev.net/repository/maven-releases/'
+            def snapshotsRepoUrl = 'https://repo.savagedev.net/repository/maven-snapshots/'
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials(PasswordCredentials)
+        }
+    }
+
+    publications {
+        shadow(MavenPublication) { publication ->
+            groupId = project.group
+            artifactId = 'IMLib'
+            version = project.version
+            project.shadow.component(publication)
+        }
+    }
+}

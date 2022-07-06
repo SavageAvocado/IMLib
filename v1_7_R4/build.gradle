@@ -1,0 +1,16 @@
+group 'net.savagedev'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    flatDir { dirs 'libs' }
+}
+
+dependencies {
+    compileOnly name: 'spigot-1.7.10-SNAPSHOT'
+
+    compileOnly project(':Common')
+}
+
+jar {
+    archiveFileName.set(project.name + '.jar')
+}

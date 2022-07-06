@@ -1,0 +1,14 @@
+group 'net.savagedev'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.18.1-R0.1-SNAPSHOT'
+
+    compileOnly project(':Common')
+}
+
+jar {
+    archiveFileName.set(project.name + '.jar')
+}
