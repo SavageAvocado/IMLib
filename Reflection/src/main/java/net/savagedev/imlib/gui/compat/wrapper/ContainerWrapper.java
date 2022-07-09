@@ -8,8 +8,12 @@ public class ContainerWrapper {
     static {
         try {
             CONTAINER_CLASS = Class.forName("net.minecraft.server." + ReflectionTitleUpdater.VERSION + ".Container");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException ignored) {
+            try {
+                CONTAINER_CLASS = Class.forName("net.minecraft.world.inventory.Container");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -17,15 +21,20 @@ public class ContainerWrapper {
         return new ContainerWrapper(container);
     }
 
+    private final Object handle;
+
     private int windowId = -1;
-    private Object handle;
 
     private ContainerWrapper(Object handle) {
         this.handle = handle;
         try {
             this.windowId = (int) this.handle.getClass().getField("windowId").get(this.handle);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (IllegalAccessException | NoSuchFieldException ignored) {
+            try {
+                this.windowId = (int) this.handle.getClass().getField("j").get(this.handle);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
         }
     }
 

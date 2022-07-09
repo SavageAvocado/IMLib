@@ -98,7 +98,12 @@ public abstract class AbstractInteractionMenu implements InteractionMenu {
     public void refresh() {
         this.lock.lock();
         try {
-            this.getInventory().getViewers().stream().filter(entity -> entity instanceof Player).map(entity -> (Player) entity).forEach(player -> this.builder.accept(this, player));
+            this.getInventory().getViewers().stream()
+                    .filter(entity -> entity instanceof Player)
+                    .map(entity -> (Player) entity)
+                    .forEach(player ->
+                            this.builder.accept(this, player)
+                    );
         } finally {
             this.lock.unlock();
         }
