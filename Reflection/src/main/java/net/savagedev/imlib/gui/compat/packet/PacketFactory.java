@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class PacketFactory {
+public final class PacketFactory {
     private static Constructor<?> PACKET_OPEN_WINDOW_CONSTRUCTOR;
     private static Constructor<?> CHAT_MESSAGE_CONSTRUCTOR;
 
@@ -68,11 +68,12 @@ public class PacketFactory {
             }
         }
 
-        try {
-            assert chatMessageClass != null;
-            CHAT_MESSAGE_CONSTRUCTOR = chatMessageClass.getConstructor(String.class, Object[].class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        if (chatMessageClass != null) {
+            try {
+                CHAT_MESSAGE_CONSTRUCTOR = chatMessageClass.getConstructor(String.class, Object[].class);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         }
 
         try {
@@ -189,7 +190,7 @@ public class PacketFactory {
                         e.printStackTrace();
                     }
                 }
-            case 54:
+            default:
                 try {
                     return CONTAINERS.getField("GENERIC_9X6").get(null);
                 } catch (NoSuchFieldException ignored) {

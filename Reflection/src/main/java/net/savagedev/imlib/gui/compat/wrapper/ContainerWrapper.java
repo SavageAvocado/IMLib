@@ -2,7 +2,7 @@ package net.savagedev.imlib.gui.compat.wrapper;
 
 import net.savagedev.imlib.gui.compat.ReflectionTitleUpdater;
 
-public class ContainerWrapper {
+public final class ContainerWrapper {
     static Class<?> CONTAINER_CLASS;
 
     static {

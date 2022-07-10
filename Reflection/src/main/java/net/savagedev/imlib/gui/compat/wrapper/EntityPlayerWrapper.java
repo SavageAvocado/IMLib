@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityPlayerWrapper {
+public final class EntityPlayerWrapper {
     private static final Map<String, String> OBFUSCATED_ACTIVE_CONTAINER_MAPPINGS = new HashMap<>();
 
     static {
